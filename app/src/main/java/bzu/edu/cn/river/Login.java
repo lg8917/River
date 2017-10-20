@@ -124,7 +124,7 @@ public class Login extends AppCompatActivity {
                         //2.1若返回json数据success为true的话，调用保存密码与自动登录状态的方法
                         if(jsonResult.isSuccess()){   //2.1成功，则进入主界面
                             savePassAndAutoLogin();
-                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            Intent intent = new Intent(Login.this, History.class);
                             startActivity(intent);
                         }else{   //2.2失败则显示提示信息
                             new AlertDialog.Builder(Login.this).setTitle("信息提示")
