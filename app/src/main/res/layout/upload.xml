@@ -47,35 +47,6 @@
             android:scrollbars="vertical"
            />
         </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ur4"
-        android:layout_below="@id/ur3">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加语音资料:"
-            android:textSize="20dp"
-            android:id="@+id/ut9"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ut9"
-            android:id="@+id/ub3"
-            android:text="按住说话"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="上传"
-        android:id="@+id/ub4"
-        android:layout_below="@id/ur4"
-        android:background="@color/colorPrimary"
-        android:textSize="25dp"
-        android:layout_marginTop="30dp"
-        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -131,10 +102,9 @@
         android:id="@+id/ut2"
         />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ut2"
-            android:text="117.958285"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             android:id="@+id/ut3"/>
@@ -147,10 +117,9 @@
             android:id="@+id/ut4"
             android:layout_toRightOf="@id/ut3"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ut4"
-            android:text="117.958285"
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/ut5"/>
@@ -163,13 +132,44 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/ut6"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ut6"
-            android:text="山东滨州市滨城区滨州学院"
             android:layout_below="@id/ut2"
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/ut7"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ur4"
+        android:layout_below="@+id/ur3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加语音资料:"
+            android:textSize="20dp"
+            android:id="@+id/ut9"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ut9"
+            android:id="@+id/ub3"
+            android:text="按住说话"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传"
+        android:id="@+id/ub4"
+        android:layout_below="@id/ur4"
+        android:background="@color/colorPrimary"
+        android:textSize="25dp"
+        android:layout_marginTop="30dp"
+        />
 </RelativeLayout>

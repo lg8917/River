@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-    compile files('libs/android-async-http-1.4.8.jar')
-    compile files('libs/httpcore-4.4.6.jar')
+    compile files('libs/TencentLocationSDK_v6.1.2_r1df4baaa_170627_1056.jar')
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

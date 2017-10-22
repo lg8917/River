@@ -37,14 +37,8 @@ public class MainActivity extends AppCompatActivity {
         String url = UrlConst.LOGOUT;
         asyncHttpClient.post(url, null, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-            }
-            @Override
-            public void onFailure(int i, org.apache.http.Header[] headers, byte[] bytes, Throwable throwable) {
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
 
-            }
-
-            public void onSuccess(int statusCode, PreferenceActivity.Header[] headers, byte[] responseBody) {
                 //statusCode:状态码    headers：头信息  responseBody：返回的内容，返回的实体
 
                 //判断状态码
@@ -69,12 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            public void onFailure(int statusCode, PreferenceActivity.Header[] headers,
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers,
                                   byte[] responseBody, Throwable error) {
             }
         });
     }
 }
-
-
-

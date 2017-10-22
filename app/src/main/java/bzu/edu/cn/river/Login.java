@@ -107,7 +107,8 @@ public class Login extends AppCompatActivity {
         String url = UrlConst.LOGIN;
         asyncHttpClient.post(url, params, new AsyncHttpResponseHandler() {
 
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                 //statusCode:状态码    headers：头信息  responseBody：返回的内容，返回的实体
 
                 //判断状态码
@@ -119,7 +120,6 @@ public class Login extends AppCompatActivity {
                         Gson gson = new Gson();
                         JsonResult jsonResult = gson.fromJson(result, JsonResult.class);
                         //Toast.makeText(LoginActivity.this, jsonResult.getMessage(), Toast.LENGTH_LONG).show();
-
                         //2.判断返回的json数据
                         //2.1若返回json数据success为true的话，调用保存密码与自动登录状态的方法
                         if(jsonResult.isSuccess()){   //2.1成功，则进入主界面
@@ -140,7 +140,7 @@ public class Login extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers,
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers,
                                   byte[] responseBody, Throwable error) {
             }
         });
