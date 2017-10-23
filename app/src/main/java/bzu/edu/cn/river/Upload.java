@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
 import android.media.MediaRecorder;
@@ -35,12 +36,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.Base64;
 import com.loopj.android.http.RequestParams;
 import com.tencent.map.geolocation.TencentLocation;
 import com.tencent.map.geolocation.TencentLocationListener;
 import com.tencent.map.geolocation.TencentLocationManager;
 import com.tencent.map.geolocation.TencentLocationRequest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,6 +92,13 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
     private MyListAdapter mAdapter;
     private EditText ue1;
     private Warn warn;
+    private File image;
+
+    AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    RequestParams params = new RequestParams();
+
+
+    File file1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +113,7 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
         ut7 = (TextView) findViewById(R.id.ut7);
         ut5 = (TextView) findViewById(R.id.ut5);
         ue1 = (EditText) findViewById(R.id.ue1);
-        warn=new Warn();
+        warn = new Warn();
         init();
         context = this;
         //PopupWindow的布局文件
@@ -135,7 +147,6 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
         //6.0以上需要权限申请
         requestPermissions();
     }
-
     /**
      * 开启扫描之前判断权限是否打开
      */
@@ -154,7 +165,6 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, VOICE_REQUEST_CODE);
         }
     }
-
     /**
      * 请求权限回调
      */
@@ -169,7 +179,6 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
             }
         }
     }
-
 
     public void StartListener() {
         //Button的touch监听
@@ -244,12 +253,10 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
             Log.v("this", "定位失败！");
         }
     }
-
     @Override
     public void onStatusUpdate(String arg0, int arg1, String arg2) {
         // TODO Auto-generated method stub
     }
-
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
@@ -259,17 +266,14 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
                 TencentLocationManager.getInstance(this);
         locationManager.removeUpdates(this);
     }
-
     public void on(View view) {
         finish();
     }
-
     public void init() {
         ui1.setOnClickListener(new addPhoto());
         pai.setOnClickListener(new addPhoto());
         ub4.setOnClickListener(new upload());
     }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         System.out.println(">>>>>>>>>>>" + requestCode + ">>" + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
@@ -284,6 +288,7 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
             cursor.close();
             ui1.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             System.out.println("图片地址：" + picturePath);
+          image=new File(picturePath);
         }
         if (resultCode != RESULT_OK) {
             Toast.makeText(Upload.this, "ActivityResult resultCode error", Toast.LENGTH_SHORT).show();
@@ -294,7 +299,6 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
             // Toast.makeText(MainActivity.this,"跳转成功",Toast.LENGTH_LONG).show();
         }
     }
-
     private class addPhoto implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -304,10 +308,8 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
             startActivityForResult(i, RESULT_LOAD_IMAGE);
         }
     }
-
     public void onClick(View view) {
     }
-
     //上传至数据库功能
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void warnValues() {
@@ -315,36 +317,50 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
         warn.setLongitude(Double.parseDouble(ut5.getText().toString()));
         warn.setName(ut7.getText().toString());
 //        warn.setUploader(upLoader);
-        warn.setUploader("wer");
+        warn.setUploader("李根");
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         warn.setCreateTime(df.format(new Date()));// new Date()为获取当前系统时间
         warn.setDescription(ue1.getText().toString());
         warn.setState(2);
+
     }
     private class upload implements View.OnClickListener {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onClick(View view) {
             warnValues();
-            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-            RequestParams params = new RequestParams();
+//            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+//            RequestParams params = new RequestParams();
 //                params.put("warn.warn",warn);
-          //  params.put("warn.id ", warn);
             params.put("warn.longitude", warn.getLongitude());
             params.put("warn.latitude", warn.getLatitude());
             params.put("warn.name ", warn.getName());
+
             params.put("warn.createTime", warn.getCreateTime());
             params.put("warn.description", warn.getDescription());
             params.put("warn.uploader", warn.getUploader());
             params.put("warn.state", warn.getState());
+
+            file1=  new File(picturePath);
+            try {
+                params.put("warn.zhaopian", file1);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            params.put("warn.file ", "fjsdijf.jpg");
+//            params.put("warn.file", warn.getFile());
+//            System.out.println(image);
+//           try {
+//              params.put("image",image);
+//           } catch (FileNotFoundException e) {
+//               e.printStackTrace();
+//           }
             //url:   parmas：请求时携带的参数信息   responseHandler：是一个匿名内部类接受成功过失败
             String url = UrlConst.SAVA_WARN;
             // Toast.makeText(LoginActivity.this,params.toString(),Toast.LENGTH_LONG).show();
             asyncHttpClient.post(url, params, new AsyncHttpResponseHandler() {
-
                 public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
-                    //statusCode:状态码    headers：头信息  responseBody：返回的内容，返回的实体
-
+                    //statusCode:状态码 s   headers：头信息  responseBody：返回的内容，返回的实体
                     //Toast.makeText(LoginActivity.this, "asdf", Toast.LENGTH_LONG).show();
                     //判断状态码
                     if (statusCode == 200) {
@@ -376,7 +392,6 @@ public class Upload extends AppCompatActivity implements View.OnClickListener, T
                 }
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
                 }
             });
         }

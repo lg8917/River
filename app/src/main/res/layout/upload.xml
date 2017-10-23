@@ -51,44 +51,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ur1"
-        android:layout_below="@+id/l1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择图片或视频资料上传："
-            android:textSize="20dp"
-            android:id="@+id/ut1"/>
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/ui1"
-            android:layout_below="@+id/ut1"
-            android:src="@drawable/add"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ub1"
-            android:text="选取图片"
-             android:onClick="show"
-           android:layout_below="@id/ui1"
-            android:layout_marginTop="5dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ub2"
-            android:text="选取视频"
-            android:layout_below="@id/ui1"
-            android:layout_toRightOf="@id/ub1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/ur2"
         android:layout_below="@+id/ur1"
         android:layout_alignParentLeft="true"
@@ -117,7 +79,7 @@
             android:id="@+id/ut4"
             android:layout_toRightOf="@id/ut3"/>
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ut4"
             android:textSize="20dp"
@@ -172,4 +134,43 @@
         android:textSize="25dp"
         android:layout_marginTop="30dp"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ur1"
+        android:layout_below="@+id/l1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择图片或视频资料上传："
+            android:textSize="20dp"
+            android:id="@+id/ut1"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/ui1"
+            android:layout_below="@+id/ut1"
+            android:src="@drawable/add"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ub1"
+            android:text="选取图片"
+             android:onClick="show"
+           android:layout_below="@id/ui1"
+            android:layout_marginTop="5dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ub2"
+            android:onClick="OnUpMove"
+            android:text="选取视频"
+            android:layout_below="@id/ui1"
+            android:layout_toRightOf="@id/ub1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
 </RelativeLayout>
